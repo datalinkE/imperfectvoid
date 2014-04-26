@@ -3,7 +3,10 @@ LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
 
 LOCAL_MODULE     := imperfect-void
-LOCAL_SRC_FILES  := main.cpp
+LOCAL_SRC_FILES  := main.cpp \
+				   Kernel.cpp \
+				   Android.cpp \
+				   Timer.cpp
 LOCAL_C_INCLUDES := $(LOCAL_PATH)
 LOCAL_LDLIBS := -llog -landroid -lEGL -lGLESv2
 LOCAL_STATIC_LIBRARIES := android_native_app_glue

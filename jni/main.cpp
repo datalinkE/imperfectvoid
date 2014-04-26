@@ -1,8 +1,24 @@
 #include <jni.h>
 #include <android_native_app_glue.h>
 #include <util/logger.hpp>
+#include "Kernel.h"
+#include "Timer.h"
+#include "Android.h"
 
 void android_main(android_app* pState)
+{
+	Kernel kernel;
+
+	Android androidTask(pState, Task::PLATFORM_PRIORITY);
+	Timer timerTask(Task::TIMER_PRIORITY);
+
+	kernel.AddTask(&androidTask);
+	kernel.AddTask(&timerTask);
+
+	kernel.Execute();
+}
+
+void _android_main(android_app* pState)
 {
 	app_dummy();
 
