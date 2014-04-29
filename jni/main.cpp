@@ -4,6 +4,7 @@
 #include "Kernel.h"
 #include "Timer.h"
 #include "Android.h"
+#include "Renderer.h"
 
 void android_main(android_app* pState)
 {
@@ -11,9 +12,11 @@ void android_main(android_app* pState)
 
 	Android androidTask(pState, Task::PLATFORM_PRIORITY);
 	Timer timerTask(Task::TIMER_PRIORITY);
+	Renderer rendererTask(pState, Task::RENDER_PRIORITY);
 
 	kernel.AddTask(&androidTask);
 	kernel.AddTask(&timerTask);
+	kernel.AddTask(&rendererTask);
 
 	kernel.Execute();
 }
