@@ -5,34 +5,41 @@
 bool Android::m_bClosing	= false;
 bool Android::m_bPaused		= false;
 
-static void android_handle_cmd(struct android_app* app, int32_t cmd)
+boost::signals2::signal<void()> Android::sigInit;
+boost::signals2::signal<void()> Android::sigDestroy;
+boost::signals2::signal<void()> Android::sigTermWindow;
+
+void Android::android_handle_cmd(struct android_app* app, int32_t cmd)
 {
 	switch (cmd)
 	{
 		case APP_CMD_INIT_WINDOW:
 		{
 			DLOG() << "APP_CMD_INIT_WINDOW";
-			Renderer* pRenderer = static_cast<Renderer*>(app->userData);
-			assert(pRenderer);
-			pRenderer->Init();
+			//Renderer* pRenderer = static_cast<Renderer*>(app->userData);
+			//assert(pRenderer);
+			//pRenderer->Init();
+			sigInit();
 		}
 		break;
 
 	case APP_CMD_DESTROY:
 		{
 			DLOG() << "APP_CMD_DESTROY";
-			Renderer* pRenderer = static_cast<Renderer*>(app->userData);
-			assert(pRenderer);
-			pRenderer->Destroy();
+			//Renderer* pRenderer = static_cast<Renderer*>(app->userData);
+			//assert(pRenderer);
+			//pRenderer->Destroy();
+			sigDestroy();
 		}
 		break;
 
 	case APP_CMD_TERM_WINDOW:
 		{
 			DLOG() << "APP_CMD_TERM_WINDOW";
-			Renderer* pRenderer = static_cast<Renderer*>(app->userData);
-			assert(pRenderer);
-			pRenderer->Destroy();
+			//Renderer* pRenderer = static_cast<Renderer*>(app->userData);
+			//assert(pRenderer);
+			//pRenderer->Destroy();
+			sigTermWindow();
 		}
 		break;
 

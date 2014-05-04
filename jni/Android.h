@@ -3,6 +3,7 @@
 
 #include <android_native_app_glue.h>
 #include "Task.hpp"
+#include <boost/signals2.hpp>
 
 class Android
 	:	public Task
@@ -32,6 +33,12 @@ public:
 
 public:
 	virtual std::string getName()		{ return "Android"; }
+
+public:
+	static void android_handle_cmd(struct android_app* app, int32_t cmd);
+	static boost::signals2::signal<void()> sigInit;
+	static boost::signals2::signal<void()> sigDestroy;
+	static boost::signals2::signal<void()> sigTermWindow;
 };
 
 

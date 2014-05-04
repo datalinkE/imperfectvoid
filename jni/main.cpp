@@ -6,6 +6,8 @@
 #include "Android.h"
 #include "Renderer.h"
 #include "Chapter5Task.h"
+#include <boost/signals2.hpp>
+#include <boost/bind.hpp>
 
 void android_main(android_app* pState)
 {
@@ -18,6 +20,10 @@ void android_main(android_app* pState)
 	Timer timerTask(Task::TIMER_PRIORITY);
 	Renderer rendererTask(pState, Task::RENDER_PRIORITY);
 	pState->userData = static_cast<void*>(&rendererTask);
+
+	Android::sigInit.connect(boost::bind(&Renderer::Init, &rendererTask));
+	Android::sigDestroy.connect(boost::bind(&Renderer::Destroy, &rendererTask));
+	Android::sigTermWindow.connect(boost::bind(&Renderer::Destroy, &rendererTask));
 
 	Chapter5Task mainTask(&rendererTask, Task::GAME_PRIORITY);
 
