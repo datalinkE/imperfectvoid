@@ -61,6 +61,9 @@ public:
 	virtual void	Stop();
 
 	bool IsInitialized() { return m_initialized; }
+
+public:
+	virtual std::string getName()		{ return "Renderer"; }
 };
 
 

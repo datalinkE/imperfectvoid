@@ -1,4 +1,5 @@
 #include "Kernel.h"
+#include "Android.h"
 
 Kernel::Kernel()
 {
@@ -26,10 +27,10 @@ void Kernel::Execute()
 {
 	while (m_tasks.size())
 	{
-		//if (Android::IsClosing())
-		//{
-		//	KillAllTasks();
-		//}
+		if (Android::IsClosing())
+		{
+			KillAllTasks();
+		}
 
 		TaskListIterator iter;
 		for (iter = m_tasks.begin(); iter != m_tasks.end(); ++iter)
@@ -54,12 +55,14 @@ void Kernel::Execute()
 		}
 	}
 
-	//Android::ClearClosing();
+	Android::ClearClosing();
 }
 
 bool Kernel::AddTask(Task* pTask)
 {
 	bool started = pTask->Start();
+
+	DLOG() << pTask->getName() << started;
 
 	if (started)
 	{

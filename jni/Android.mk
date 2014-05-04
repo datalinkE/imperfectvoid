@@ -12,7 +12,10 @@ LOCAL_SRC_FILES  := main.cpp \
 				   Renderable/Shaders/BasicShader.cpp \
 				   Renderable/Shaders/Shader.cpp \
 				   Renderable/Shaders/TextureShader.cpp \
-				   Renderable/Textures/Texture.cpp
+				   Renderable/Textures/Texture.cpp \
+				   Util/File.cpp \
+				   Util/TGAFile.cpp \
+				   Chapter5Task.cpp
 LOCAL_C_INCLUDES := $(LOCAL_PATH)
 LOCAL_LDLIBS := -llog -landroid -lEGL -lGLESv2
 LOCAL_STATIC_LIBRARIES := android_native_app_glue

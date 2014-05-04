@@ -91,6 +91,8 @@ void Renderer::Init()
 	}
 
 	m_initialized = true;
+
+	DLOG() << "initialized" << m_initialized;
 }
 
 void Renderer::Destroy()
@@ -191,6 +193,8 @@ void Renderer::OnSuspend()
 
 void Renderer::Draw(Renderable* pRenderable)
 {
+	DLOG();
+
 	assert(pRenderable);
 	if (pRenderable)
 	{

@@ -12,6 +12,7 @@ private:
 	static bool		m_bPaused;
 	android_app*	m_pState;
 
+
 public:
 	Android(android_app* pState, const unsigned int priority);
 	virtual ~Android();
@@ -28,6 +29,9 @@ public:
 	static bool IsClosing()						{ return m_bClosing; }
 	static void SetPaused(const bool paused)	{ m_bPaused = paused; }
 	static bool IsPaused()		 				{ return m_bPaused; }
+
+public:
+	virtual std::string getName()		{ return "Android"; }
 };
 
 

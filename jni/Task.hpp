@@ -1,6 +1,9 @@
 #ifndef TASK_H_
 #define TASK_H_
 
+#include "Util/Logger.hpp"
+#include <string>
+
 class Task
 {
 public:
@@ -12,6 +15,8 @@ public:
 	virtual void	Update()	= 0;
 	virtual void	OnResume()	= 0;
 	virtual void	Stop()		= 0;
+
+	virtual std::string getName() { return "SomeTask"; }
 
 	void 			SetCanKill(const bool canKill);
 	bool			CanKill() const;

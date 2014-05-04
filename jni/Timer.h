@@ -30,6 +30,9 @@ public:
 	virtual void 	Update();
 	virtual void 	OnResume();
 	virtual void 	Stop();
+
+public:
+	virtual std::string getName()		{ return "Timer"; }
 };
 
 inline float Timer::GetTimeFrame() const

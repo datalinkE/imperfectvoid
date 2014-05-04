@@ -25,6 +25,11 @@ namespace Util
 		template<class T>
 		inline Logger& operator << (const T& value)
 		{
+			if(m_content.tellp())
+			{
+				m_content << " ";
+			}
+
 			m_content << value;
 			return *this;
 		}
