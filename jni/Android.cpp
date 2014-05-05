@@ -59,12 +59,34 @@ void Android::android_handle_cmd(struct android_app* app, int32_t cmd)
 	}
 }
 
+int Android::android_handle_input(struct android_app* app, AInputEvent* event)
+{
+	int handled = 0;
+	if (AInputEvent_getType(event) == AINPUT_EVENT_TYPE_MOTION)
+	{
+		if (AInputEvent_getSource(event) == AINPUT_SOURCE_TOUCHSCREEN)
+		{
+			int action = AMotionEvent_getAction(event);
+			if (action == AMOTION_EVENT_ACTION_DOWN)
+			{
+				//Framework::SendEvent(Framework::JUMP_EVENT);
+				float tapX = AMotionEvent_getX(event, 0);
+				float tapY = AMotionEvent_getY(event, 0);
+				DLOG() << "tap at" << tapX << tapY;
+				handled = 1;
+			}
+		}
+	}
+	return handled;
+}
+
 Android::Android(android_app* pState, unsigned int priority)
 	:	Task(priority)
 {
 	DLOG();
 	m_pState = pState;
 	m_pState->onAppCmd = android_handle_cmd;
+	m_pState->onInputEvent = android_handle_input;
 }
 
 Android::~Android()

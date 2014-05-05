@@ -39,6 +39,9 @@ public:
 	static boost::signals2::signal<void()> sigInit;
 	static boost::signals2::signal<void()> sigDestroy;
 	static boost::signals2::signal<void()> sigTermWindow;
+
+	static int android_handle_input(struct android_app* app, AInputEvent* event);
+	static boost::signals2::signal<void()> sigTouch;
 };
 
 
