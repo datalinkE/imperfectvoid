@@ -2,16 +2,20 @@
 #include <cassert>
 #include "../Geometry/Geometry.h"
 #include "../Textures/Texture.h"
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 TextureShader::TextureShader()
 	:	m_pTexture(NULL)
 {
 	m_vertexShaderCode =
+			"uniform mat4 u_mModel; \n"
 			"attribute vec4 a_vPosition;        \n"
 			"attribute vec2 a_texCoord;         \n"
 			"varying   vec2 v_texCoord;         \n"
 			"void main(){                       \n"
-			"    gl_Position = a_vPosition;		\n"
+			"    gl_Position = u_mModel * a_vPosition;		\n"
 			"    v_texCoord = a_texCoord;		\n"
 			"}                                  \n";
 
@@ -36,6 +40,7 @@ void TextureShader::Link()
 	m_positionAttributeHandle	= glGetAttribLocation(m_programId, "a_vPosition");
 	m_texCoordAttributeHandle	= glGetAttribLocation(m_programId, "a_texCoord");
 	m_samplerHandle				= glGetUniformLocation(m_programId, "s_texture");
+	m_modelHandle				= glGetUniformLocation(m_programId, "u_mModel");
 }
 
 void TextureShader::Setup(Renderable& renderable)
@@ -49,6 +54,8 @@ void TextureShader::Setup(Renderable& renderable)
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, m_pTexture->GetId());
 		glUniform1i(m_samplerHandle, 0);
+		glm::mat4 model = glm::rotate(glm::mat4(1), 30.0f, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(m_modelHandle, 1, false, glm::value_ptr(model));
 
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);

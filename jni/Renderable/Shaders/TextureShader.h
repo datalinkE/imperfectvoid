@@ -13,6 +13,7 @@ private:
 	GLint		m_positionAttributeHandle;
 	GLint		m_texCoordAttributeHandle;
 	GLint		m_samplerHandle;
+	GLint		m_modelHandle;
 
 public:
 	TextureShader();

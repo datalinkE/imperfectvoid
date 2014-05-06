@@ -18,8 +18,10 @@ LOCAL_SRC_FILES  := main.cpp \
 				   Chapter5Task.cpp
 				   
 BOOST_INCLUDES := $(LOCAL_PATH)/../../boost_1_55_0
+GLM_INCLUDES := $(LOCAL_PATH)/../../glm-0.9.5.3
 LOCAL_C_INCLUDES := $(LOCAL_PATH)
 LOCAL_C_INCLUDES += $(BOOST_INCLUDES)
+LOCAL_C_INCLUDES += $(GLM_INCLUDES)
 LOCAL_CPP_FEATURES += exceptions
 LOCAL_LDLIBS := -llog -landroid -lEGL -lGLESv2
 LOCAL_STATIC_LIBRARIES := android_native_app_glue
