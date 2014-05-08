@@ -54,8 +54,11 @@ void TextureShader::Setup(Renderable& renderable)
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, m_pTexture->GetId());
 		glUniform1i(m_samplerHandle, 0);
-		glm::mat4 model = glm::rotate(glm::mat4(1), 30.0f, glm::vec3(0.0f, 0.0f, 1.0f));
-		glUniformMatrix4fv(m_modelHandle, 1, false, glm::value_ptr(model));
+		float ratio = 480.0f / 800.0f;
+		glm::mat4 projection = glm::ortho<GLfloat>( -1.0f, 1.0f, -ratio, ratio, -1.0f, 1.0f );
+		glm::mat4 model = glm::rotate(glm::mat4(1), 45.0f, glm::vec3(0.0f, 0.0f, 1.0f));
+		glm::mat4 mvp = projection * model;
+		glUniformMatrix4fv(m_modelHandle, 1, false, glm::value_ptr(mvp));
 
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
