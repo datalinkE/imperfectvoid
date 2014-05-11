@@ -1,15 +1,15 @@
-#include "Kernel.h"
+#include "TasksLoop.h"
 #include "Android.h"
 
-Kernel::Kernel()
+TasksLoop::TasksLoop()
 {
 }
 
-Kernel::~Kernel()
+TasksLoop::~TasksLoop()
 {
 }
 
-void Kernel::PriorityAdd(Task* pTask)
+void TasksLoop::PriorityAdd(Task* pTask)
 {
 	TaskListIterator iter;
 	for (iter = m_tasks.begin(); iter != m_tasks.end(); ++iter)
@@ -23,7 +23,7 @@ void Kernel::PriorityAdd(Task* pTask)
 	m_tasks.insert(iter, pTask);
 }
 
-void Kernel::Execute()
+void TasksLoop::Execute()
 {
 	while (m_tasks.size())
 	{
@@ -58,7 +58,7 @@ void Kernel::Execute()
 	Android::ClearClosing();
 }
 
-bool Kernel::AddTask(Task* pTask)
+bool TasksLoop::AddTask(Task* pTask)
 {
 	bool started = pTask->Start();
 
@@ -71,7 +71,7 @@ bool Kernel::AddTask(Task* pTask)
 	return started;
 }
 
-void Kernel::SuspendTask(Task* pTask)
+void TasksLoop::SuspendTask(Task* pTask)
 {
 	// Ensure that task is running
 	if (std::find(m_tasks.begin(), m_tasks.end(), pTask) != m_tasks.end())
@@ -82,7 +82,7 @@ void Kernel::SuspendTask(Task* pTask)
 	}
 }
 
-void Kernel::ResumeTask(Task* pTask)
+void TasksLoop::ResumeTask(Task* pTask)
 {
 	if (std::find(m_pausedTasks.begin(), m_pausedTasks.end(), pTask) != m_pausedTasks.end())
 	{
@@ -93,7 +93,7 @@ void Kernel::ResumeTask(Task* pTask)
 	}
 }
 
-void Kernel::RemoveTask(Task* pTask)
+void TasksLoop::RemoveTask(Task* pTask)
 {
 	if (std::find(m_tasks.begin(), m_tasks.end(), pTask) != m_tasks.end())
 	{
@@ -101,7 +101,7 @@ void Kernel::RemoveTask(Task* pTask)
 	}
 }
 
-void Kernel::KillAllTasks()
+void TasksLoop::KillAllTasks()
 {
 	for (TaskListIterator iter = m_tasks.begin(); iter != m_tasks.end(); ++iter)
 	{

@@ -1,7 +1,7 @@
 #include <jni.h>
 #include <android_native_app_glue.h>
 #include <Util/Logger.hpp>
-#include "Kernel.h"
+#include "TasksLoop.h"
 #include "Timer.h"
 #include "Android.h"
 #include "Renderer.h"
@@ -14,9 +14,9 @@ void android_main(android_app* pState)
 
 	Util::File::SetAssetManager(pState->activity->assetManager);
 
-	Kernel kernel;
+	TasksLoop kernel;
 
-	Android androidTask(pState, Task::PLATFORM_PRIORITY);
+	Android eventsTask(pState, Task::PLATFORM_PRIORITY);
 	Timer timerTask(Task::TIMER_PRIORITY);
 	Renderer rendererTask(pState, Task::RENDER_PRIORITY);
 	pState->userData = static_cast<void*>(&rendererTask);
@@ -25,42 +25,13 @@ void android_main(android_app* pState)
 	Android::sigDestroy.connect(boost::bind(&Renderer::Destroy, &rendererTask));
 	Android::sigTermWindow.connect(boost::bind(&Renderer::Destroy, &rendererTask));
 
-	Chapter5Task mainTask(&rendererTask, Task::GAME_PRIORITY);
+	Chapter5Task logicTask(&rendererTask, Task::GAME_PRIORITY);
 
-	kernel.AddTask(&androidTask);
+	kernel.AddTask(&eventsTask);
 	kernel.AddTask(&timerTask);
+	kernel.AddTask(&logicTask);
 	kernel.AddTask(&rendererTask);
-	kernel.AddTask(&mainTask);
 
 	kernel.Execute();
 }
 
-void _android_main(android_app* pState)
-{
-	app_dummy();
-
-	DLOG() << "hello";
-	DLOG() << "world";
-	DLOG() << "hello" << "world";
-
-	int events;
-	android_poll_source* pSource;
-
-	while(true)
-	{
-		int ident = ALooper_pollAll(0, 0, &events, (void**)&pSource);
-		if (ident >= 0)
-		{
-			if (pSource)
-			{
-				pSource->process(pState, pSource);
-			}
-
-			if (pState->destroyRequested)
-			{
-				DLOG() << "destroy";
-				break;
-			}
-		}
-	}
-}

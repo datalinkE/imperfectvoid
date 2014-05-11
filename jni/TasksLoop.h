@@ -1,10 +1,10 @@
-#ifndef KERNEL_H_
-#define KERNEL_H_
+#ifndef TASKSLOOP_H_
+#define TASKSLOOP_H_
 
 #include <list>
 #include "Task.hpp"
 
-class Kernel
+class TasksLoop
 {
 	private:
 		typedef std::list<Task*>			TaskList;
@@ -16,8 +16,8 @@ class Kernel
 		void		PriorityAdd(Task* pTask);
 
 	public:
-		Kernel();
-		virtual ~Kernel();
+		TasksLoop();
+		virtual ~TasksLoop();
 
 		void	Execute();
 
@@ -30,4 +30,4 @@ class Kernel
 		bool	HasTasks()	{ return m_tasks.size(); }
 };
 
-#endif // KERNEL_H_
+#endif // TASKSLOOP_H_

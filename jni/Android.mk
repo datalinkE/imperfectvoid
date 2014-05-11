@@ -4,7 +4,7 @@ include $(CLEAR_VARS)
 
 LOCAL_MODULE     := imperfect-void
 LOCAL_SRC_FILES  := main.cpp \
-				   Kernel.cpp \
+				   TasksLoop.cpp \
 				   Android.cpp \
 				   Timer.cpp \
 				   Renderer.cpp \
