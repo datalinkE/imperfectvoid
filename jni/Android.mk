@@ -16,6 +16,7 @@ LOCAL_SRC_FILES  := main.cpp \
 				   Renderable/Shaders/ShaderProgram.cpp \
 				   Renderable/Shaders/GeometryShaderProgram.cpp \
 				   Renderable/Shaders/TextureShaderProgram.cpp \
+				   Renderable/Transform2D.cpp
 				   
 				   
 BOOST_INCLUDES := $(LOCAL_PATH)/../../boost_1_55_0

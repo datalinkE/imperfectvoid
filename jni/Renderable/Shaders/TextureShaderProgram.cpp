@@ -5,6 +5,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include "../Transform2D.h"
 
 TextureShaderProgram::TextureShaderProgram()
 	:	m_pTexture(NULL)
@@ -60,7 +61,7 @@ void TextureShaderProgram::Setup(Renderable& renderable)
 		glUniform1i(m_samplerHandle, 0);
 		float ratio = 480.0f / 800.0f;
 		glm::mat4 projection = glm::ortho<GLfloat>( -1.0f, 1.0f, -ratio, ratio, -1.0f, 1.0f );
-		glm::mat4 model = glm::rotate(glm::mat4(1), 45.0f, glm::vec3(0.0f, 0.0f, 1.0f));
+		glm::mat4 model = Transform2D().SetRotation(45.f).SetScale(0.5f).SetPosition(glm::vec3(0.5f, -0.5f, 0.f)).GetMatrix();
 		glm::mat4 mvp = projection * model;
 		glUniformMatrix4fv(m_modelHandle, 1, false, glm::value_ptr(mvp));
 
