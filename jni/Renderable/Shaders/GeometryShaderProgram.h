@@ -1,17 +1,17 @@
 #ifndef BASICSHADER_H_
 #define BASICSHADER_H_
 
-#include "Shader.h"
+#include "ShaderProgram.h"
 
-class BasicShader
-	:	public Shader
+class GeometryShaderProgram
+	:	public ShaderProgram
 {
 private:
 	GLint	m_positionAttributeHandle;
 
 public:
-	BasicShader();
-	virtual ~BasicShader();
+	GeometryShaderProgram();
+	virtual ~GeometryShaderProgram();
 
 	virtual void Link();
 	virtual void Setup(Renderable& renderable);

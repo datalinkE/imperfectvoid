@@ -5,7 +5,7 @@
 #include "Renderable/Renderable.h"
 #include "Renderable/Geometry/Geometry.h"
 #include "Renderable/Textures/Texture.h"
-#include "Renderable/Shaders/Shader.h"
+#include "Renderable/Shaders/ShaderProgram.h"
 
 Renderer::Renderer(android_app* pState, const unsigned int priority)
 	:	Task(priority)
@@ -86,7 +86,7 @@ void Renderer::Init()
 
 	for (ShaderVectorIterator iter = m_shaders.begin(); iter != m_shaders.end(); ++iter)
 	{
-		Shader* pCurrent = *iter;
+		ShaderProgram* pCurrent = *iter;
 		pCurrent->Link();
 	}
 
@@ -135,7 +135,7 @@ void Renderer::RemoveRenderable(Renderable* pRenderable)
 	}
 }
 
-void Renderer::AddShader(Shader* pShader)
+void Renderer::AddShader(ShaderProgram* pShader)
 {
 	assert(pShader);
 	if (m_initialized)
@@ -145,11 +145,11 @@ void Renderer::AddShader(Shader* pShader)
 	m_shaders.push_back(pShader);
 }
 
-void Renderer::RemoveShader(Shader* pShader)
+void Renderer::RemoveShader(ShaderProgram* pShader)
 {
 	for (ShaderVectorIterator iter = m_shaders.begin(); iter != m_shaders.end(); ++iter)
 	{
-		Shader* pCurrent = *iter;
+		ShaderProgram* pCurrent = *iter;
 		if (pCurrent == pShader)
 		{
 			m_shaders.erase(iter);
@@ -199,7 +199,7 @@ void Renderer::Draw(Renderable* pRenderable)
 	if (pRenderable)
 	{
 		Geometry* pGeometry = pRenderable->GetGeometry();
-		Shader* pShader = pRenderable->GetShader();
+		ShaderProgram* pShader = pRenderable->GetShader();
 		assert(pShader && pGeometry);
 		if (pShader && pGeometry)
 		{

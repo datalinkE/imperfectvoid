@@ -4,7 +4,7 @@
 #include "Task.hpp"
 #include "Renderable/Geometry/Geometry.h"
 #include "Renderable/Textures/Texture.h"
-#include "Renderable/Shaders/TextureShader.h"
+#include "Renderable/Shaders/TextureShaderProgram.h"
 #include "Renderable/Renderable.h"
 #include "Util/File.h"
 
@@ -27,7 +27,7 @@ private:
 	Util::File				m_file;
 	Renderer*		m_pRenderer;
 	Geometry			m_geometry;
-	TextureShader	m_textureShader;
+	TextureShaderProgram	m_textureShader;
 	Renderable		m_renderable;
 	Texture			m_texture;
 

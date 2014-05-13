@@ -1,8 +1,9 @@
-#include "BasicShader.h"
+#include "GeometryShaderProgram.h"
 #include <cassert>
 #include "../Geometry/Geometry.h"
 
-BasicShader::BasicShader()
+GeometryShaderProgram::GeometryShaderProgram()
+	:	m_positionAttributeHandle(GL_INVALID_VALUE)
 {
 	m_vertexShaderCode =
 			"attribute vec4 a_vPosition;        \n"
@@ -17,21 +18,21 @@ BasicShader::BasicShader()
 			"}                         						\n";
 }
 
-BasicShader::~BasicShader()
+GeometryShaderProgram::~GeometryShaderProgram()
 {
 
 }
 
-void BasicShader::Link()
+void GeometryShaderProgram::Link()
 {
-	Shader::Link();
+	ShaderProgram::Link();
 
 	m_positionAttributeHandle = glGetAttribLocation(m_programId, "a_vPosition");
 }
 
-void BasicShader::Setup(Renderable& renderable)
+void GeometryShaderProgram::Setup(Renderable& renderable)
 {
-	Shader::Setup(renderable);
+	ShaderProgram::Setup(renderable);
 
 	Geometry* pGeometry = renderable.GetGeometry();
 	assert(pGeometry);

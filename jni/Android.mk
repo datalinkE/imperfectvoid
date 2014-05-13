@@ -8,14 +8,15 @@ LOCAL_SRC_FILES  := main.cpp \
 				   Android.cpp \
 				   Timer.cpp \
 				   Renderer.cpp \
-				   Renderable/Geometry/Geometry.cpp \
-				   Renderable/Shaders/BasicShader.cpp \
-				   Renderable/Shaders/Shader.cpp \
-				   Renderable/Shaders/TextureShader.cpp \
-				   Renderable/Textures/Texture.cpp \
+				   Chapter5Task.cpp	\
 				   Util/File.cpp \
 				   Util/TGAFile.cpp \
-				   Chapter5Task.cpp
+				   Renderable/Geometry/Geometry.cpp \
+				   Renderable/Textures/Texture.cpp \
+				   Renderable/Shaders/ShaderProgram.cpp \
+				   Renderable/Shaders/GeometryShaderProgram.cpp \
+				   Renderable/Shaders/TextureShaderProgram.cpp \
+				   
 				   
 BOOST_INCLUDES := $(LOCAL_PATH)/../../boost_1_55_0
 GLM_INCLUDES := $(LOCAL_PATH)/../../glm-0.9.5.3

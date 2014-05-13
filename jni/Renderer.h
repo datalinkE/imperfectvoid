@@ -6,7 +6,7 @@
 #include <EGL/egl.h>
 #include <vector>
 
-class Shader;
+class ShaderProgram;
 class Texture;
 class Renderable;
 
@@ -22,7 +22,7 @@ private:
 	int				m_height;
 	bool			m_initialized;
 
-	typedef std::vector<Shader*>		ShaderVector;
+	typedef std::vector<ShaderProgram*>		ShaderVector;
 	typedef ShaderVector::iterator		ShaderVectorIterator;
 
 	typedef std::vector<Texture*>		TextureVector;
@@ -47,8 +47,8 @@ public:
 	void AddRenderable(Renderable* pRenderable);
 	void RemoveRenderable(Renderable* pRenderable);
 
-	void AddShader(Shader* pShader);
-	void RemoveShader(Shader* pShader);
+	void AddShader(ShaderProgram* pShader);
+	void RemoveShader(ShaderProgram* pShader);
 
 	void AddTexture(Texture* pTexture);
 	void RemoveTexture(Texture* pTexture);

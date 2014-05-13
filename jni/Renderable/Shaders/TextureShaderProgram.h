@@ -1,12 +1,12 @@
 #ifndef TEXTURESHADER_H_
 #define TEXTURESHADER_H_
 
-#include "Shader.h"
+#include "ShaderProgram.h"
 
 class Texture;
 
-class TextureShader
-	:	public Shader
+class TextureShaderProgram
+	:	public ShaderProgram
 {
 private:
 	Texture*	m_pTexture;
@@ -16,8 +16,8 @@ private:
 	GLint		m_modelHandle;
 
 public:
-	TextureShader();
-	virtual ~TextureShader();
+	TextureShaderProgram();
+	virtual ~TextureShaderProgram();
 
 	virtual void Link();
 	virtual void Setup(Renderable& renderable);
@@ -26,12 +26,12 @@ public:
 	Texture*		GetTexture();
 };
 
-inline void TextureShader::SetTexture(Texture* pTexture)
+inline void TextureShaderProgram::SetTexture(Texture* pTexture)
 {
 	m_pTexture = pTexture;
 }
 
-inline Texture* TextureShader::GetTexture()
+inline Texture* TextureShaderProgram::GetTexture()
 {
 	return m_pTexture;
 }

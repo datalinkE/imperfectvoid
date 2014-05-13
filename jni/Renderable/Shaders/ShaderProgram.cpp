@@ -1,19 +1,20 @@
-#include "Shader.h"
+#include "ShaderProgram.h"
 
-Shader::Shader()
+ShaderProgram::ShaderProgram()
 	:	m_vertexShaderId(GL_INVALID_VALUE)
 	,	m_fragmentShaderId(GL_INVALID_VALUE)
 	,	m_programId(GL_INVALID_VALUE)
+	,	m_isLinked(false)
 {
 
 }
 
-Shader::~Shader()
+ShaderProgram::~ShaderProgram()
 {
 
 }
 
-void Shader::LoadShader(GLuint id, std::string& shaderCode)
+void ShaderProgram::LoadShader(GLuint id, std::string& shaderCode)
 {
 	static const uint32_t NUM_SHADERS = 1;
 
@@ -27,7 +28,7 @@ void Shader::LoadShader(GLuint id, std::string& shaderCode)
 	glAttachShader(m_programId, id);
 }
 
-void Shader::Link()
+void ShaderProgram::Link()
 {
 	m_programId = glCreateProgram();
 
@@ -42,7 +43,7 @@ void Shader::Link()
 	m_isLinked = true;
 }
 
-void Shader::Setup(Renderable& renderable)
+void ShaderProgram::Setup(Renderable& renderable)
 {
 	glUseProgram(m_programId);
 }

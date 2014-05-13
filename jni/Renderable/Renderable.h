@@ -2,14 +2,14 @@
 #define RENDERABLE_H_
 
 class Geometry;
-class Shader;
+class ShaderProgram;
 class Texture;
 
 class Renderable
 {
 private:
 	Geometry*	m_pGeometry;
-	Shader*		m_pShader;
+	ShaderProgram*		m_pShader;
 
 public:
 	Renderable();
@@ -18,8 +18,8 @@ public:
 	void			SetGeometry(Geometry* pGeometry);
 	Geometry*		GetGeometry();
 
-	void			SetShader(Shader* pShader);
-	Shader*			GetShader();
+	void			SetShader(ShaderProgram* pShader);
+	ShaderProgram*	GetShader();
 };
 
 inline Renderable::Renderable()
@@ -44,12 +44,12 @@ inline Geometry* Renderable::GetGeometry()
 	return m_pGeometry;
 }
 
-inline void Renderable::SetShader(Shader* pShader)
+inline void Renderable::SetShader(ShaderProgram* pShader)
 {
 	m_pShader = pShader;
 }
 
-inline Shader* Renderable::GetShader()
+inline ShaderProgram* Renderable::GetShader()
 {
 	return m_pShader;
 }

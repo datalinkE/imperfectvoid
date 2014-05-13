@@ -5,7 +5,7 @@
 #include <string>
 #include "../Renderable.h"
 
-class Shader
+class ShaderProgram
 {
 private:
 	void LoadShader(GLenum shaderType, std::string& shaderCode);
@@ -21,8 +21,8 @@ protected:
 	bool			m_isLinked;
 
 public:
-	Shader();
-	virtual ~Shader();
+	ShaderProgram();
+	virtual ~ShaderProgram();
 
 	virtual void Link();
 	virtual void Setup(Renderable& renderable);

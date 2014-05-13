@@ -1,4 +1,4 @@
-#include "TextureShader.h"
+#include "TextureShaderProgram.h"
 #include <cassert>
 #include "../Geometry/Geometry.h"
 #include "../Textures/Texture.h"
@@ -6,8 +6,12 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-TextureShader::TextureShader()
+TextureShaderProgram::TextureShaderProgram()
 	:	m_pTexture(NULL)
+	,	m_modelHandle(GL_INVALID_VALUE)
+	,	m_samplerHandle(GL_INVALID_VALUE)
+	,	m_texCoordAttributeHandle(GL_INVALID_VALUE)
+	,	m_positionAttributeHandle(GL_INVALID_VALUE)
 {
 	m_vertexShaderCode =
 			"uniform mat4 u_mModel; \n"
@@ -28,14 +32,14 @@ TextureShader::TextureShader()
 			"}                         								\n";
 }
 
-TextureShader::~TextureShader()
+TextureShaderProgram::~TextureShaderProgram()
 {
 
 }
 
-void TextureShader::Link()
+void TextureShaderProgram::Link()
 {
-	Shader::Link();
+	ShaderProgram::Link();
 
 	m_positionAttributeHandle	= glGetAttribLocation(m_programId, "a_vPosition");
 	m_texCoordAttributeHandle	= glGetAttribLocation(m_programId, "a_texCoord");
@@ -43,13 +47,13 @@ void TextureShader::Link()
 	m_modelHandle				= glGetUniformLocation(m_programId, "u_mModel");
 }
 
-void TextureShader::Setup(Renderable& renderable)
+void TextureShaderProgram::Setup(Renderable& renderable)
 {
 	assert(m_pTexture);
 	Geometry* pGeometry = renderable.GetGeometry();
 	if (pGeometry && m_pTexture)
 	{
-		Shader::Setup(renderable);
+		ShaderProgram::Setup(renderable);
 
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, m_pTexture->GetId());

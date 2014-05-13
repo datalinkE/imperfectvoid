@@ -11,6 +11,7 @@
 
 void android_main(android_app* pState)
 {
+	app_dummy();
 
 	Util::File::SetAssetManager(pState->activity->assetManager);
 
